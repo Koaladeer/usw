@@ -1,5 +1,6 @@
 import json
 
+
 class GameEnvironment:
     def __init__(self, config_file="data/world_config.json"):
         with open(config_file) as f:
@@ -15,5 +16,6 @@ class GameEnvironment:
             self.current_room = valid[action]
             return True
         return False
+
     def is_terminal(self):
         return self.world["rooms"][self.current_room].get("terminal", False)
