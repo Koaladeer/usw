@@ -1,16 +1,83 @@
 {
-  "start": "cave_entrance",
+  "start": "forest_path",
   "rooms": {
+    "forest_path": {
+      "description": "You are on a forest path. There is a cave entrance to the north and a ruined hut to the east.",
+      "actions": {
+        "go north": "cave_entrance",
+        "go east": "ruined_hut"
+      }
+    },
+    "forest_path_key_taken": {
+      "description": "You are on a forest path. There is a cave entrance to the north and a ruined hut to the east.",
+      "actions": {
+        "go north": "cave_entrance",
+        "go east": "ruined_hut_key_taken"
+      }
+    },
+    "ruined_hut": {
+      "description": "Inside the hut you find rubble and a rusty iron key on the floor.",
+      "item": "iron_key",
+      "actions": {
+        "take key": "ruined_hut_key_taken",
+        "go west": "forest_path"
+      }
+    },
+    "ruined_hut_key_taken": {
+      "description": "You are in the ruined hut. You've taken the iron key.",
+      "actions": {
+        "go west": "forest_path_key_taken"
+      }
+    },
     "cave_entrance": {
-      "description": "You are at the entrance of a dark cave. There's a path north.",
-      "actions": { "go north": "dark_hall" }
+      "description": "You are at the entrance of a dark cave. There's a path leading inside to the north and a cliff trail to the west.",
+      "actions": {
+        "go north": "dark_tunnel",
+        "go west": "cliff_trail",
+        "go south": "forest_path"
+      }
     },
-    "dark_hall": {
-      "description": "A bat flies overhead. There's a door to the east.",
-      "actions": { "go east": "treasure_room" }
+    "cliff_trail": {
+      "description": "You walk along a narrow cliff. The trail ends abruptly. One wrong step could be fatal.",
+      "actions": {
+        "go back": "cave_entrance",
+        "go forward": "game_over_fall"
+      }
     },
-    "treasure_room": {
-      "description": "You've found the treasure chamber!",
+    "game_over_fall": {
+      "description": "You slip on the cliff edge and fall. Game over.",
+      "terminal": true
+    },
+    "dark_tunnel": {
+      "description": "You are in a pitch-black tunnel. There's a light ahead to the east and a side chamber to the north.",
+      "actions": {
+        "go east": "stone_door",
+        "go north": "side_chamber",
+        "go south": "cave_entrance"
+      }
+    },
+    "side_chamber": {
+      "description": "The chamber contains strange symbols. There's a hidden passage west.",
+      "actions": {
+        "go west": "trap_room",
+        "go south": "dark_tunnel"
+      }
+    },
+    "trap_room": {
+      "description": "The floor gives way beneath you — it's a trap!",
+      "actions": {},
+      "terminal": true
+    },
+    "stone_door": {
+      "description": "You find a large stone door with a keyhole. The passage continues east beyond it.",
+      "requires": "iron_key",
+      "actions": {
+        "use key": "treasure_room_locked",
+        "go west": "dark_tunnel"
+      }
+    },
+    "treasure_room_locked": {
+      "description": "You unlock the stone door. Inside is the treasure chamber, glittering with gold.",
       "terminal": true
     }
   }
