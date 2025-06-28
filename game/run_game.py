@@ -12,7 +12,7 @@ def main():
     while not env.is_terminal():
 
         print(f"\n{env.get_state()}")
-        action = input(">> ").strip().lower()
+        action = input(">> ").strip().lower()##this should be the agents action
 
 
         # Handle picking up items
